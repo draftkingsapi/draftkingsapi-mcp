@@ -1,0 +1,54 @@
+{
+  "name": "draftkingsapi-mcp",
+  "version": "0.1.0",
+  "description": "MCP server (stdio) for draftkingsapi.com: DraftKings Pick6 lines and line history, DFS salaries, sportsbook odds and box scores. Keyless tools work with no key. Independent, not affiliated with DraftKings.",
+  "mcpName": "com.draftkingsapi/server",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "draftkingsapi-mcp": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "server.json"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",
+    "start": "node dist/cli.js",
+    "test": "npm run build && node --test test/server.test.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "draftkings",
+    "pick6",
+    "dfs",
+    "sportsbook",
+    "odds",
+    "sports-data"
+  ],
+  "homepage": "https://draftkingsapi.com",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/draftkingsapi/draftkingsapi-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/draftkingsapi/draftkingsapi-mcp/issues"
+  }
+}

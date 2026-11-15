@@ -1,0 +1,45 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.draftkingsapi/server",
+  "title": "DraftKings API",
+  "description": "Independent DraftKings Pick6 lines/history, DFS salaries, odds, box scores. Keyless tools: no key",
+  "version": "1.1.0",
+  "websiteUrl": "https://draftkingsapi.com/developers/starter-kit",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "draftkingsapi-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "DRAFTKINGS_API_KEY",
+          "description": "Optional. Your draftkingsapi.com API key for data tools; keyless tools work without it. Free key at https://draftkingsapi.com/sign-up",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://draftkingsapi.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional for public search and fetch; supply Bearer followed by your API key for data tools.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string",
+          "placeholder": "Bearer YOUR_API_KEY"
+        }
+      ]
+    }
+  ]
+}
