@@ -76,12 +76,21 @@ export async function callTool(tool: ToolDef, args: Args, apiKey = process.env.D
 }
 
 export function createServer(apiKey = process.env.DRAFTKINGS_API_KEY) {
-  const server = new McpServer({ name: "draftkingsapi", version: VERSION });
+  const server = new McpServer(
+    { name: "draftkingsapi", version: VERSION },
+    {
+      instructions:
+        "Independent DraftKings data (not affiliated with DraftKings): Pick6 lines and line moves, DFS slates and salaries, " +
+        "sportsbook odds and price history, cross-book EV and arbitrage, and box scores. Every tool is read-only. " +
+        "Tools whose title says keyless need no key; the rest need DRAFTKINGS_API_KEY (free at " + SIGN_UP_URL + "). " +
+        "Start with get_coverage (keyed) or get_public_board (keyless). Every row carries a capture time; check it before calling a line current.",
+    },
+  );
   const task = z
     .string()
     .max(500)
     .optional()
-    .describe("Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits.");
+    .describe("Optional, never a filter: the user's task in one plain sentence, with no personal data or secrets. Logged for 35 days to guide what the API builds next.");
   for (const tool of TOOLS) {
     server.registerTool(
       tool.name,
@@ -89,7 +98,7 @@ export function createServer(apiKey = process.env.DRAFTKINGS_API_KEY) {
         title: tool.title,
         description: tool.description,
         inputSchema: { ...tool.shape, task },
-        annotations: { readOnlyHint: true, openWorldHint: true },
+        annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
       },
       async (args: Args) => callTool(tool, args, apiKey),
     );
