@@ -1,11 +1,17 @@
-# draftkingsapi-mcp
+# DraftKings MCP server: draftkingsapi-mcp
 
-A stdio MCP server for [draftkingsapi.com](https://draftkingsapi.com). It gives AI agents DraftKings Pick6 lines and
+A DraftKings MCP server for Claude, Cursor and any MCP client. Ask an AI agent for DraftKings sportsbook odds, Pick6 lines or DFS salaries; it answers from live data through draftkingsapi.com.
+
+[Website](https://draftkingsapi.com/?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Docs](https://draftkingsapi.com/docs?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Free API key](https://draftkingsapi.com/auth/sign-up?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Pricing](https://draftkingsapi.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [All SDKs](https://draftkingsapi.com/sdks?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp)
+
+Also for draftkingsapi.com: [Python: `pip install draftkingsapi`](https://github.com/draftkingsapi/draftkingsapi-python) | [JavaScript: `npm install draftkingsapi`](https://github.com/draftkingsapi/draftkingsapi-js)
+
+A stdio MCP server for [draftkingsapi.com](https://draftkingsapi.com/?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp). It gives AI agents DraftKings Pick6 lines and
 line history, DFS slates and salaries, sportsbook odds and price history, cross-book comparisons and box scores.
 
 The keyless tools work with no key and spend no credits. The keyed tools read `DRAFTKINGS_API_KEY`. Without one,
 they return a message that links to the free sign-up (100 credits a month, no card):
-https://draftkingsapi.com/sign-up
+https://draftkingsapi.com/auth/sign-up?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp
 
 draftkingsapi.com is an independent API. It is not affiliated with or endorsed by DraftKings. "DraftKings" is a
 trademark of its owner and is used here only to describe the data.
