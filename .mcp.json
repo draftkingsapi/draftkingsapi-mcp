@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "draftkingsapi": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "draftkingsapi-mcp"
+      ],
+      "env": {
+        "DRAFTKINGS_API_KEY": ""
+      }
+    }
+  }
+}
