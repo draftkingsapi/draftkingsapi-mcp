@@ -1,0 +1,1095 @@
+{
+  "author": "Stunning Couches LLC",
+  "authorUrl": "https://github.com/draftkingsapi",
+  "description": "MCP server (stdio) for draftkingsapi.com: DraftKings Pick6 lines and line history, DFS salaries, sportsbook odds and box scores. Keyless tools work with no key. Independent, not affiliated with DraftKings.",
+  "homepage": "https://draftkingsapi.com",
+  "identifier": "draftkingsapi-draftkingsapi-mcp",
+  "name": "DraftKings API",
+  "prompts": [],
+  "resources": [],
+  "tags": [
+    "mcp",
+    "model-context-protocol",
+    "draftkings",
+    "pick6",
+    "dfs",
+    "sportsbook",
+    "odds",
+    "sports-data"
+  ],
+  "tools": [
+    {
+      "name": "get_public_board",
+      "title": "Pick6 board (keyless)",
+      "description": "Delayed, capped DraftKings Pick6 board: player, stat, line, multipliers, start time, plus recent line moves. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "league": {
+            "type": "string",
+            "enum": [
+              "nfl",
+              "nba",
+              "nhl",
+              "cfb",
+              "cbb",
+              "soccer",
+              "mlb",
+              "ufc",
+              "cs",
+              "lol"
+            ],
+            "description": "League. Omit for every league."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_public_sportsbook",
+      "title": "Sportsbook mainlines (keyless)",
+      "description": "DraftKings Sportsbook moneyline, spread and total prices per game. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "league": {
+            "type": "string",
+            "enum": [
+              "nfl",
+              "nba",
+              "nhl",
+              "cfb",
+              "cbb",
+              "mlb",
+              "epl",
+              "mls"
+            ],
+            "description": "League. Omit for every league."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_public_line_moves",
+      "title": "Recent line moves (keyless)",
+      "description": "Recent Pick6 and sportsbook line moves with previous and current line. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "league": {
+            "type": "string",
+            "description": "League in lower case, for example nfl or nba."
+          },
+          "market": {
+            "type": "string",
+            "enum": [
+              "all",
+              "pick6",
+              "sportsbook"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_demo_sample",
+      "title": "Sample rows (keyless)",
+      "description": "Frozen sample rows that show a dataset's response shape. Never present them as data. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "dataset": {
+            "type": "string",
+            "enum": [
+              "pick6",
+              "dfs",
+              "events",
+              "odds",
+              "history",
+              "pick6-history",
+              "coverage",
+              "stats-games",
+              "stats-player-games",
+              "stats-team-games"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "required": [
+          "dataset"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_credit_costs",
+      "title": "Credit costs (keyless)",
+      "description": "Credits each endpoint costs, optionally for a path and row count. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "An API path such as /api/v1/odds."
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_status",
+      "title": "Collection status (keyless)",
+      "description": "Measured collection status: jobs, workers and the freshness of each dataset. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_history_coverage",
+      "title": "History coverage (keyless)",
+      "description": "When stored history starts for each league, with capture counts. No key needed, no credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_coverage",
+      "title": "Live coverage",
+      "description": "Live coverage of every dataset for your key. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_sportsbook_events",
+      "title": "Sportsbook events",
+      "description": "DraftKings Sportsbook events and start times. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pre",
+              "in",
+              "post",
+              "unknown"
+            ]
+          },
+          "search": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_odds",
+      "title": "Sportsbook odds",
+      "description": "Current DraftKings Sportsbook prices by event and market, with age and stale flags. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "market": {
+            "type": "string",
+            "description": "moneyline, spread, total or a prop market."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pre",
+              "in",
+              "post",
+              "unknown"
+            ]
+          },
+          "fresh_only": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_odds_history",
+      "title": "Sportsbook price history",
+      "description": "Stored DraftKings Sportsbook price history for an event or offer. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "offer_id": {
+            "type": "string"
+          },
+          "market": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_pick6_projections",
+      "title": "Pick6 lines",
+      "description": "Current DraftKings Pick6 lines with multipliers, full board, every league. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "stat": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "search": {
+            "type": "string",
+            "description": "Player name."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "paused",
+              "live",
+              "pregame"
+            ]
+          },
+          "pickable_id": {
+            "type": "string"
+          },
+          "fresh_only": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_pick6_history",
+      "title": "Pick6 change history",
+      "description": "Every recorded Pick6 line, multiplier and availability change, oldest first. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "stat": {
+            "type": "string"
+          },
+          "pickable_id": {
+            "type": "string"
+          },
+          "after": {
+            "type": "string",
+            "description": "pagination.next / next_after from the previous page, or 'latest'."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_pick6_line_history",
+      "title": "Line history of one Pick6 prop",
+      "description": "Recorded moves for one Pick6 prop (pickable_id from get_pick6_projections or get_public_board id). Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pickable_id": {
+            "type": "string",
+            "description": "The prop's pickable_id."
+          },
+          "change_type": {
+            "type": "string",
+            "enum": [
+              "line_move",
+              "multiplier_only",
+              "availability",
+              "alternate_lines"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "required": [
+          "pickable_id"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_dfs_slates",
+      "title": "DFS slates",
+      "description": "DraftKings DFS slates by sport. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "slate_id": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_dfs_contests",
+      "title": "DFS contests",
+      "description": "DraftKings DFS contests with entry fee, prize pool and entries. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "slate_id": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_dfs_players",
+      "title": "DFS players and salaries",
+      "description": "DraftKings DFS players with salaries and positions for a slate. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "slate_id": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "search": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Rows to return, at most 100."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "pagination.next_cursor from the previous page, unchanged."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_compare",
+      "title": "Pick6 against sportsbook",
+      "description": "Pick6 lines next to DraftKings Sportsbook lines for the same player, stat and game, with the gap. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "description": "Sport code in upper case, for example NFL, NBA, NHL, MLB, NCAAF, NCAAB, SOCCER."
+          },
+          "stat": {
+            "type": "string"
+          },
+          "player": {
+            "type": "string"
+          },
+          "min_gap": {
+            "type": "number"
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "gap",
+              "start"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_compare_books",
+      "title": "Lines across books",
+      "description": "Lines across books with an optional fair price. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "league": {
+            "type": "string"
+          },
+          "market_type": {
+            "type": "string",
+            "enum": [
+              "moneyline",
+              "spread",
+              "total",
+              "player_prop"
+            ]
+          },
+          "player": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "stat": {
+            "type": "string"
+          },
+          "with_fair": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_ev",
+      "title": "Expected value prices",
+      "description": "Prices with positive expected value against a fair line. Analysis, not advice. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "league": {
+            "type": "string"
+          },
+          "market_type": {
+            "type": "string",
+            "enum": [
+              "moneyline",
+              "spread",
+              "total",
+              "player_prop"
+            ]
+          },
+          "book": {
+            "type": "string"
+          },
+          "player": {
+            "type": "string"
+          },
+          "min_edge": {
+            "type": "number"
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "ev",
+              "edge_cents",
+              "kelly"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_arbitrage",
+      "title": "Arbitrage and middles",
+      "description": "Arbitrage and middle opportunities across books. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "arbitrage",
+              "middles"
+            ]
+          },
+          "league": {
+            "type": "string"
+          },
+          "market_type": {
+            "type": "string",
+            "enum": [
+              "moneyline",
+              "spread",
+              "total",
+              "player_prop"
+            ]
+          },
+          "min_profit": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_stats_player_games",
+      "title": "Player box scores",
+      "description": "Player game logs for a sport and season. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "enum": [
+              "NBA",
+              "NFL",
+              "NHL",
+              "NCAAF",
+              "NCAAB",
+              "MLB",
+              "WNBA"
+            ]
+          },
+          "season": {
+            "type": "integer",
+            "description": "Season year, for example 2026."
+          },
+          "athlete_id": {
+            "type": "string"
+          },
+          "team_id": {
+            "type": "string"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "after": {
+            "type": "string",
+            "description": "pagination.next / next_after from the previous page, or 'latest'."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "required": [
+          "sport",
+          "season"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_stats_games",
+      "title": "Game results",
+      "description": "Game results for a sport and season. Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sport": {
+            "type": "string",
+            "enum": [
+              "NBA",
+              "NFL",
+              "NHL",
+              "NCAAF",
+              "NCAAB",
+              "MLB",
+              "WNBA"
+            ]
+          },
+          "season": {
+            "type": "integer"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Rows to return, at most 200."
+          },
+          "after": {
+            "type": "string",
+            "description": "pagination.next / next_after from the previous page, or 'latest'."
+          },
+          "task": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Optional: the user's task in one plain sentence, nothing personal. Helps the API return what fits."
+          }
+        },
+        "required": [
+          "sport",
+          "season"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ],
+  "version": "0.1.0"
+}
