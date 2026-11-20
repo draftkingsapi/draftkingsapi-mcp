@@ -1,6 +1,6 @@
 {
   "name": "draftkingsapi-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server (stdio) for draftkingsapi.com: DraftKings Pick6 lines and line history, DFS salaries, sportsbook odds and box scores. Keyless tools work with no key. Independent, not affiliated with DraftKings.",
   "mcpName": "com.draftkingsapi/server",
   "type": "module",

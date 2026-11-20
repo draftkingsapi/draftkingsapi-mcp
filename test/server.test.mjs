@@ -35,7 +35,7 @@ test("keyed tool without a key points to sign-up", async () => {
   try {
     const out = await client.callTool({ name: "get_odds", arguments: { sport: "NFL" } });
     assert.equal(out.isError, true);
-    assert.match(out.content[0].text, /draftkingsapi\.com\/sign-up/);
+    assert.match(out.content[0].text, /draftkingsapi\.com\/auth\/sign-up/);
   } finally {
     await client.close();
   }

@@ -6,7 +6,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { SIGN_UP_URL, TOOLS, type ToolDef } from "./tools.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 const BASE_URL = (process.env.DRAFTKINGS_API_BASE ?? "https://draftkingsapi.com").replace(/\/+$/, "");
 const MAX_TEXT = 60000;
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SIGN_UP_URL = "https://draftkingsapi.com/sign-up";
+export const SIGN_UP_URL = "https://draftkingsapi.com/auth/sign-up";
 
 export interface ToolDef {
   name: string;
@@ -34,7 +34,7 @@ const team = z.string().optional().describe("Part of a team name or abbreviation
 const slateId = z.string().optional().describe("slate_id from get_dfs_slates. Omit for every current slate.");
 
 const KEYLESS = "No key and no credits; delayed and capped, 60 requests a minute per address.";
-const KEYED = "Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/sign-up); billed per row, see get_credit_costs.";
+const KEYED = "Needs DRAFTKINGS_API_KEY (free key, no card, at https://draftkingsapi.com/auth/sign-up); billed per row, see get_credit_costs.";
 
 export const TOOLS: ToolDef[] = [
   // Keyless

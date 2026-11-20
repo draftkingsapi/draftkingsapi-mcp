@@ -2,7 +2,10 @@
 
 All notable changes to this package. Dates are UTC.
 
-## Unreleased
+## 0.1.1 - 2026-11-20
+
+- README: draftkingsapi.com link at the top, current plans (Free 100 credits a month, Pro $99), the keyless
+  preview's 25 calls a day. Sign-up links point at /auth/sign-up.
 
 - Every tool description now says when to use it instead of its siblings, what the rows contain, and what it costs;
   every argument has a description. Added the arguments the API already accepts: `offset`, `book`, `min_prob`,

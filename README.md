@@ -1,17 +1,20 @@
 # DraftKings MCP server: draftkingsapi-mcp
 
+**Website: [draftkingsapi.com](https://draftkingsapi.com/?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp)** for docs, a free API key, pricing and live status.
+
 A DraftKings MCP server for Claude, Cursor and any MCP client. Ask an AI agent for DraftKings sportsbook odds, Pick6 lines or DFS salaries; it answers from live data through draftkingsapi.com.
 
-[Website](https://draftkingsapi.com/?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Docs](https://draftkingsapi.com/docs?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Free API key](https://draftkingsapi.com/auth/sign-up?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Pricing](https://draftkingsapi.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [All SDKs](https://draftkingsapi.com/sdks?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp)
+[Website](https://draftkingsapi.com/?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Docs](https://draftkingsapi.com/docs?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Free API key](https://draftkingsapi.com/auth/sign-up?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [Pricing](https://draftkingsapi.com/pricing?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp) | [All SDKs](https://draftkingsapi.com/sdks?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp)
 
 Also for draftkingsapi.com: [Python: `pip install draftkingsapi`](https://github.com/draftkingsapi/draftkingsapi-python) | [JavaScript: `npm install draftkingsapi`](https://github.com/draftkingsapi/draftkingsapi-js)
 
-A stdio MCP server for [draftkingsapi.com](https://draftkingsapi.com/?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp). It gives AI agents DraftKings Pick6 lines and
+A stdio MCP server for [draftkingsapi.com](https://draftkingsapi.com/?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp). It gives AI agents DraftKings Pick6 lines and
 line history, DFS slates and salaries, sportsbook odds and price history, cross-book comparisons and box scores.
 
-The keyless tools work with no key and spend no credits. The keyed tools read `DRAFTKINGS_API_KEY`. Without one,
+The keyless tools work with no key and spend no credits. The keyless board tools (`get_public_board`,
+`get_public_sportsbook`, `get_public_line_moves`) are a preview limited to 25 calls a day per network. The keyed tools read `DRAFTKINGS_API_KEY`. Without one,
 they return a message that links to the free sign-up (100 credits a month, no card):
-https://draftkingsapi.com/auth/sign-up?utm_source=github&utm_medium=readme&utm_campaign=draftkingsapi-mcp
+https://draftkingsapi.com/auth/sign-up?utm_source=npm&utm_medium=readme&utm_campaign=draftkingsapi-mcp
 
 draftkingsapi.com is an independent API. It is not affiliated with or endorsed by DraftKings. "DraftKings" is a
 trademark of its owner and is used here only to describe the data.
@@ -88,6 +91,10 @@ For the data tools, send the header `Authorization: Bearer dk_your_key`.
 
 Ask your agent: "Use draftkingsapi to show the current NBA Pick6 board and which lines moved." It calls
 `get_public_board` with `league: "nba"`, which needs no key.
+
+## Plans
+
+Free 100 credits a month (no card), Developer $49 (10,000 credits), Pro $99 (30,000), Production $149 (50,000) and Scale $499 (250,000) a month. Full pricing: https://draftkingsapi.com/pricing.
 
 ## Development
 
